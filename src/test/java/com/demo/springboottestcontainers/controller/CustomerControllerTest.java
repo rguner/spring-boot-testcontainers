@@ -2,6 +2,7 @@ package com.demo.springboottestcontainers.controller;
 
 import com.demo.springboottestcontainers.entity.Customer;
 import com.demo.springboottestcontainers.repository.CustomerRepository;
+import com.demo.springboottestcontainers.service.CustomerService;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +38,7 @@ class CustomerControllerTest {
    */
   @Container
   @ServiceConnection // With @ServiceConnection annotation we can remove @DynamicPropertySource annotation.
-  static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
+  static PostgreSQLContainer<?> postgresContainer = new PostgreSQLContainer<>(
           "postgres:15-alpine"
   );
 
@@ -57,20 +58,20 @@ class CustomerControllerTest {
 
 
   @Autowired
-  CustomerRepository customerRepository;
+  CustomerService customerService;
 
   @BeforeEach
   void setUp() {
     RestAssured.baseURI = "http://localhost:" + port;
-    customerRepository.deleteAll();
+    customerService.deleteAll();
   }
 
   @Test
   void logTestContainerDetails() {
     log.info("____________ Test container details ____________");
-    log.info("Jdbc Url: {} ", postgres.getJdbcUrl());
-    log.info("Username: {} ", postgres.getUsername());
-    log.info("Password: {} ", postgres.getPassword());
+    log.info("Jdbc Url: {} ", postgresContainer.getJdbcUrl());
+    log.info("Username: {} ", postgresContainer.getUsername());
+    log.info("Password: {} ", postgresContainer.getPassword());
   }
 
   @Test
@@ -79,7 +80,7 @@ class CustomerControllerTest {
       new Customer(null, "John", "john@mail.com"),
       new Customer(null, "Dennis", "dennis@mail.com")
     );
-    customerRepository.saveAll(customers);
+    customerService.saveAll(customers);
 
     given()
       .contentType(ContentType.JSON)

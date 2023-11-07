@@ -4,6 +4,7 @@ import com.demo.springboottestcontainers.entity.Customer;
 import com.demo.springboottestcontainers.service.CustomerService;
 import com.demo.springboottestcontainers.service.RabbitMqCustomerSender;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +20,9 @@ public class CustomerRabbitMqController {
 
 
   @PostMapping("/api/sendCustomerToRabbitMq")
-  public void sendCustomerToRabbitMq(@RequestBody Customer customer) {
+  public Customer sendCustomerToRabbitMq(@RequestBody Customer customer) {
     rabbitMqCustomerSender.messageSend(customer);
+    return customer;
   }
   
 }

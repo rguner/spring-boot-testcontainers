@@ -15,4 +15,12 @@ public class CustomerService {
     public List<Customer> getAll() {
         return customerRepository.findAll();
     }
+
+    public void deleteAll() {
+        customerRepository.deleteAll();
+    }
+
+    public void saveAll(List<Customer> customers) {
+        customerRepository.saveAll(customers);
+    }
 }
