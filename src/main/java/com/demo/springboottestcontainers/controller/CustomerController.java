@@ -14,7 +14,6 @@ public class CustomerController {
 
   private final CustomerService customerService;
 
-
   @GetMapping("/api/customers")
   public List<Customer> getAll() {
     return customerService.getAll();
