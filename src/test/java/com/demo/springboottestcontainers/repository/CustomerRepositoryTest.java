@@ -56,20 +56,20 @@ public class CustomerRepositoryTest {
         Optional<Customer> result = customerRepository.findById(savedCustomer.getId());
         assertTrue(result.isPresent());
         Customer customerFromGet = result.get();
-        assertEquals("Ramazan Guner2", customerFromGet.getName());
-        assertEquals("rguner2@gmail.com", customerFromGet.getEmail());
+        assertEquals("Ramazan Guner1", customerFromGet.getName());
+        assertEquals("rguner1@gmail.com", customerFromGet.getEmail());
 
         // update
-        savedCustomer.setName("Rmazan Guner3");
-        savedCustomer.setEmail("rguner3@gmail.com");
+        savedCustomer.setName("Ramazan Guner2");
+        savedCustomer.setEmail("rguner2@gmail.com");
         customerRepository.save(savedCustomer);
 
         // read by name
         Optional<Customer> resultByName = customerRepository.findByName(savedCustomer.getName());
         assertTrue(resultByName.isPresent());
         Customer customerFromResultByName = result.get();
-        assertEquals("Ramazan Guner3", customerFromResultByName.getName());
-        assertEquals("rguner3@gmail.com", customerFromResultByName.getEmail());
+        assertEquals("Ramazan Guner2", customerFromResultByName.getName());
+        assertEquals("rguner2@gmail.com", customerFromResultByName.getEmail());
 
         // delete
         customerRepository.delete(savedCustomer);
