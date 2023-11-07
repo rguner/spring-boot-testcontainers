@@ -31,3 +31,10 @@ spring:
     username: admin
     password: password
     requested-heartbeat: 10
+  data:
+    redis:
+      host: redis01
+      port: 6379
+      password: password123
+      database: 1
+      timeout: 60000
