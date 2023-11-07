@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Bean;
+import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.containers.RabbitMQContainer;
 import org.testcontainers.utility.DockerImageName;
@@ -26,6 +27,12 @@ public class TestSpringBootTestcontainersApplication {
     @ServiceConnection
     static RabbitMQContainer rabbitMqContainer() {
         return new RabbitMQContainer("rabbitmq:3.8.9");
+    }
+
+    @Bean
+    @ServiceConnection(name = "redis")
+    static GenericContainer redisContainer() {
+        return new GenericContainer ("redis:6.0.5");
     }
 
     public static void main(String[] args) {
