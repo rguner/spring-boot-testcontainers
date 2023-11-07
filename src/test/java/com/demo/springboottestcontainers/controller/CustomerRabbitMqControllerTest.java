@@ -39,11 +39,11 @@ class CustomerRabbitMqControllerTest {
   @ServiceConnection
   static RabbitMQContainer rabbitMqContainer = new RabbitMQContainer("rabbitmq:3.8.9");
 
-  @Autowired
-  RabbitMqCustomerSender rabbitMqCustomerSender;
-
+  /*
+  needed if we want to get message count from queue
   @Autowired
   private RabbitTemplate rabbitTemplate;
+   */
 
   @BeforeEach
   void setUp() {
@@ -73,8 +73,6 @@ class CustomerRabbitMqControllerTest {
             channel.queueDeclare("customer-queue", true, false, false,null));
     Assertions.assertEquals(1, declareOk.getMessageCount());
      */
-
-
   }
 
   @Test

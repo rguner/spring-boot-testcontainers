@@ -2,7 +2,6 @@ package com.demo.springboottestcontainers.controller;
 
 import java.util.List;
 
-import com.demo.springboottestcontainers.repository.CustomerRepository;
 import com.demo.springboottestcontainers.entity.Customer;
 import com.demo.springboottestcontainers.service.CustomerService;
 import lombok.RequiredArgsConstructor;
