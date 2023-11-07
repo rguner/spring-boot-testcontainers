@@ -20,4 +20,5 @@ public class CustomerController {
   public List<Customer> getAll() {
     return customerService.getAll();
   }
+
 }

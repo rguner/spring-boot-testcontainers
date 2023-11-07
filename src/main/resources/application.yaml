@@ -27,7 +27,7 @@ spring:
     init:
       mode: always
   rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+    addresses: rmq01:5672
+    username: admin
+    password: password
+    requested-heartbeat: 10
