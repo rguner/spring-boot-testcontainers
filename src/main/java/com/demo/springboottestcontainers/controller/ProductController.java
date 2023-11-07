@@ -30,4 +30,9 @@ public class ProductController {
     return productService.save(product);
   }
 
+  @PostMapping("/api/saveProductToRedisAsJson")
+  public Product saveProductToRedisAsJson(@RequestBody Product product) {
+    return productService.saveJson(product);
+  }
+
 }
