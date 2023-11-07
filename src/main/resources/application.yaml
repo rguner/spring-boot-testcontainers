@@ -34,7 +34,7 @@ spring:
   data:
     redis:
       host: redis01
-      port: 6379
+      port: 16379
       password: password123
       database: 1
       timeout: 60000
