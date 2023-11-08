@@ -1,9 +1,12 @@
 package com.demo.springboottestcontainers;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.data.redis.RedisConnectionDetails;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.containers.RabbitMQContainer;
@@ -25,15 +28,26 @@ public class TestSpringBootTestcontainersApplication {
 
     @Bean
     @ServiceConnection
-    static RabbitMQContainer rabbitMqContainer() {
+    RabbitMQContainer rabbitMqContainer() {
         return new RabbitMQContainer("rabbitmq:3.8.9");
     }
 
     @Bean
-    @ServiceConnection(name = "redis")
-    static GenericContainer redisContainer() {
+    @ServiceConnection(name = "redis", type = RedisConnectionDetails.class)
+    GenericContainer redisContainer() {
         return new GenericContainer ("redis:6.0.5");
     }
+
+   /*
+    @Bean
+    @DynamicPropertySource
+    void configureProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.data.redis.host", redisContainer().getHost()::toString);
+        registry.add("spring.datasource.username", postgres::getUsername);
+        registry.add("spring.datasource.password", postgres::getPassword);
+    }
+
+    */
 
     public static void main(String[] args) {
         SpringApplication.from(SpringBootTestcontainersApplication::main)
