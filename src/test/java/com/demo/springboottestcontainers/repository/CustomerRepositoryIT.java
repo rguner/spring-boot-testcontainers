@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 // do not replace the testcontainer data source
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Testcontainers
-public class CustomerRepositoryTest {
+public class CustomerRepositoryIT {
 
     @Autowired
     private CustomerRepository customerRepository;
