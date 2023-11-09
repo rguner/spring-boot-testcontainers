@@ -1,19 +1,13 @@
 package com.demo.springboottestcontainers.controller;
 
 import com.demo.springboottestcontainers.entity.Customer;
-import com.demo.springboottestcontainers.service.CustomerService;
-import com.demo.springboottestcontainers.service.RabbitMqCustomerSender;
-import com.rabbitmq.client.AMQP;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
@@ -22,15 +16,13 @@ import org.testcontainers.containers.RabbitMQContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.util.List;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasSize;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Slf4j
 @Testcontainers
-class CustomerRabbitMqControllerTest {
+class CustomerRabbitMqControllerIT {
 
   @LocalServerPort
   private Integer port;

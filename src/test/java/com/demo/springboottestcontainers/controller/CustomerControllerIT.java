@@ -1,7 +1,6 @@
 package com.demo.springboottestcontainers.controller;
 
 import com.demo.springboottestcontainers.entity.Customer;
-import com.demo.springboottestcontainers.repository.CustomerRepository;
 import com.demo.springboottestcontainers.service.CustomerService;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -12,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -26,7 +23,7 @@ import static org.hamcrest.Matchers.hasSize;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Slf4j
 @Testcontainers
-class CustomerControllerTest {
+class CustomerControllerIT {
 
   @LocalServerPort
   private Integer port;
