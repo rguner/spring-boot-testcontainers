@@ -1,5 +1,7 @@
 package com.demo.springboottestcontainers;
 
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.data.redis.RedisConnectionDetails;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -32,22 +34,23 @@ public class TestSpringBootTestcontainersApplication {
         return new RabbitMQContainer("rabbitmq:3.8.9");
     }
 
-    @Bean
-    @ServiceConnection(name = "redis", type = RedisConnectionDetails.class)
+    private GenericContainer redisContainer;
+    @Bean("redisContainer")
+    @ServiceConnection(name = "redis")
     GenericContainer redisContainer() {
-        return new GenericContainer ("redis:6.0.5");
+        redisContainer = new GenericContainer("redis:6.0.5");
+                return redisContainer;
     }
 
-   /*
-    @Bean
-    @DynamicPropertySource
-    void configureProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.data.redis.host", redisContainer().getHost()::toString);
-        registry.add("spring.datasource.username", postgres::getUsername);
-        registry.add("spring.datasource.password", postgres::getPassword);
+
+    /*
+    @PostConstruct
+    void configureProperties() {
+        System.setProperty("spring.data.redis.host", redisContainer.getHost());
+        System.setProperty("spring.data.redis.port", String.valueOf(redisContainer.getExposedPorts().get(0)));
     }
 
-    */
+     */
 
     public static void main(String[] args) {
         SpringApplication.from(SpringBootTestcontainersApplication::main)
