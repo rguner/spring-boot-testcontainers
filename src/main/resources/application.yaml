@@ -1,8 +1,8 @@
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://pgsql01-to-make-sure-tests-dont-use-this-url:5432/xchange?currentSchema=calisma
-    #url: jdbc:postgresql://pgsql01:5432/xchange?currentSchema=calisma
+    #url: jdbc:postgresql://pgsql01-to-make-sure-tests-dont-use-this-url:5432/xchange?currentSchema=calisma
+    url: jdbc:postgresql://pgsql01:5432/xchange?currentSchema=calisma
     username: admin
     password: simon
     type: com.zaxxer.hikari.HikariDataSource
@@ -33,7 +33,7 @@ spring:
     requested-heartbeat: 10
   data:
     redis:
-      host: localhost
+      host: redis01
       port: 16379
       password: password123
       database: 1
