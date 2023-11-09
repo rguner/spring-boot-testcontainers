@@ -64,20 +64,20 @@ class ProductControllerTest {
   }
 
   @Test
-  void sendCustomerToRabbitMq_WhenRabbitMqIsDown() {
-    Customer customer =  new Customer(null, "John", "john@mail.com");
+  void getProductById() {
 
-    redisContainer.stop();
     Response response = given()
             .contentType(ContentType.JSON)
-            .and()
-            .body(customer)
             .when()
-            .post("/api/sendCustomerToRabbitMq")
+            .get("/api/product/1234")
             .then()
             .extract().response();
 
-    Assertions.assertEquals(500, response.statusCode());
+    Assertions.assertEquals(200, response.statusCode());
+    Assertions.assertEquals(1234L, response.jsonPath().getLong("id"));
+    Assertions.assertEquals("Product 1", response.jsonPath().getString("name"));
+    Assertions.assertEquals("Product1 Description", response.jsonPath().getString("description"));
+    Assertions.assertEquals(100, response.jsonPath().getInt("price"));
 
   }
 

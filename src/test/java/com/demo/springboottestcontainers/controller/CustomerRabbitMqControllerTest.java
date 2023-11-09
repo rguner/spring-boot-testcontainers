@@ -39,6 +39,13 @@ class CustomerRabbitMqControllerTest {
   @ServiceConnection
   static RabbitMQContainer rabbitMqContainer = new RabbitMQContainer("rabbitmq:3.8.9");
 
+  // needed application init
+  @Container
+  @ServiceConnection
+  static PostgreSQLContainer<?> postgresContainer = new PostgreSQLContainer<>(
+          "postgres:15-alpine"
+  );
+
   /*
   needed if we want to get message count from queue
   @Autowired
