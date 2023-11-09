@@ -34,23 +34,15 @@ public class TestSpringBootTestcontainersApplication {
         return new RabbitMQContainer("rabbitmq:3.8.9");
     }
 
-    private GenericContainer redisContainer;
-    @Bean("redisContainer")
+    @Bean
     @ServiceConnection(name = "redis")
     GenericContainer redisContainer() {
-        redisContainer = new GenericContainer("redis:6.0.5");
-                return redisContainer;
-    }
-
-
-    /*
-    @PostConstruct
-    void configureProperties() {
+        GenericContainer redisContainer = new GenericContainer("redis:6.0.5").withExposedPorts(6379);
+        redisContainer.start();
         System.setProperty("spring.data.redis.host", redisContainer.getHost());
-        System.setProperty("spring.data.redis.port", String.valueOf(redisContainer.getExposedPorts().get(0)));
+        System.setProperty("spring.data.redis.port", String.valueOf(redisContainer.getFirstMappedPort()));
+        return redisContainer;
     }
-
-     */
 
     public static void main(String[] args) {
         SpringApplication.from(SpringBootTestcontainersApplication::main)
