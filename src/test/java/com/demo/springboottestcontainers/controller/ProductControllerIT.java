@@ -7,7 +7,10 @@ import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
@@ -23,6 +26,7 @@ import static io.restassured.RestAssured.given;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Slf4j
 @Testcontainers
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ProductControllerIT {
 
   @LocalServerPort
@@ -53,6 +57,7 @@ class ProductControllerIT {
   }
 
   @Test
+  @Order(1)
   void saveProductToRedis() {
     Product product = Product.builder()
             .id(1234L)
@@ -79,6 +84,7 @@ class ProductControllerIT {
   }
 
   @Test
+  @Order(2)
   void getProductById() {
 
     Response response = given()
