@@ -1,9 +1,7 @@
 package com.demo.springboottestcontainers.service;
 
-import com.demo.springboottestcontainers.entity.Customer;
 import com.demo.springboottestcontainers.entity.Product;
 import com.demo.springboottestcontainers.exception.ResourceNotFoundException;
-import com.demo.springboottestcontainers.repository.CustomerRepository;
 import com.demo.springboottestcontainers.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,7 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
