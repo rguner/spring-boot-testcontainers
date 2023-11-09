@@ -35,10 +35,11 @@ public class TestSpringBootTestcontainersApplication {
     }
 
     @Bean
-    @ServiceConnection(name = "redis")
+    //@ServiceConnection(name = "redis") //Couldn't get host and port from container with @ServiceConnection annotation for GenericContainer
     GenericContainer redisContainer() {
         GenericContainer redisContainer = new GenericContainer("redis:6.0.5").withExposedPorts(6379);
         redisContainer.start();
+
         System.setProperty("spring.data.redis.host", redisContainer.getHost());
         System.setProperty("spring.data.redis.port", String.valueOf(redisContainer.getFirstMappedPort()));
         return redisContainer;
